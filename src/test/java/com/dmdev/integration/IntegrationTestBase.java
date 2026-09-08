@@ -35,7 +35,7 @@ public abstract class IntegrationTestBase {
              var statement = connection.createStatement()) {
             statement.execute(CLEAN_SQL);
             statement.execute(CREATE_SQL);
-            statement.execute(INSERT_SQL);
+//            statement.execute(INSERT_SQL);
         }
     }
 }

@@ -33,7 +33,7 @@ public class UserService {
     }
 
     // for Mockito
-    private UserService(CreateUserValidator createUserValidator, UserDao userDao, CreateUserMapper createUserMapper, UserMapper userMapper) {
+    UserService(CreateUserValidator createUserValidator, UserDao userDao, CreateUserMapper createUserMapper, UserMapper userMapper) {
         this.createUserValidator = createUserValidator;
         this.userDao = userDao;
         this.createUserMapper = createUserMapper;

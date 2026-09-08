@@ -14,15 +14,31 @@ import java.util.Optional;
 
 import static lombok.AccessLevel.PRIVATE;
 
-@NoArgsConstructor(access = PRIVATE)
+//@NoArgsConstructor(access = PRIVATE)
+//  Без конструктора @InjectMocks не сможет изменить final поле
 public class UserService {
 
     private static final UserService INSTANCE = new UserService();
 
-    private final CreateUserValidator createUserValidator = CreateUserValidator.getInstance();
-    private final UserDao userDao = UserDao.getInstance();
-    private final CreateUserMapper createUserMapper = CreateUserMapper.getInstance();
-    private final UserMapper userMapper = UserMapper.getInstance();
+    private final CreateUserValidator createUserValidator;
+    private final UserDao userDao;
+    private final CreateUserMapper createUserMapper;
+    private final UserMapper userMapper;
+
+    private UserService() {
+        createUserValidator = CreateUserValidator.getInstance();
+        userDao = UserDao.getInstance();
+        createUserMapper = CreateUserMapper.getInstance();
+        userMapper = UserMapper.getInstance();
+    }
+
+    // for Mockito
+    private UserService(CreateUserValidator createUserValidator, UserDao userDao, CreateUserMapper createUserMapper, UserMapper userMapper) {
+        this.createUserValidator = createUserValidator;
+        this.userDao = userDao;
+        this.createUserMapper = createUserMapper;
+        this.userMapper = userMapper;
+    }
 
     public static UserService getInstance() {
         return INSTANCE;
